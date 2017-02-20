@@ -238,8 +238,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 	              String query = "SELECT * FROM codigopostal where codigoPostal='"+codp+"'";
 	              db.comando = db.conexion.createStatement();
 	              db.registro = db.comando.executeQuery(query);
-	              if(db.registro.next()){
-		              db.registro.next();
+	              if(db.registro.next()){		             
 		              provincia = db.registro.getString(1);
 		              poblacion = db.registro.getString(2);
 	              }
