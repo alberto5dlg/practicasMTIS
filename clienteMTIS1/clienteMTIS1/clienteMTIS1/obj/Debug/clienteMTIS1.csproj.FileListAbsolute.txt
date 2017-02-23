@@ -1,9 +1,0 @@
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\bin\Debug\clienteMTIS1.exe.config
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\bin\Debug\clienteMTIS1.exe
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\bin\Debug\clienteMTIS1.pdb
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.csprojResolveAssemblyReference.cache
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.Form1.resources
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.Properties.Resources.resources
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.csproj.GenerateResource.Cache
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.exe
-C:\Users\Alberto\Desktop\practicasMTIS\clienteMTIS1\clienteMTIS1\clienteMTIS1\obj\Debug\clienteMTIS1.pdb
