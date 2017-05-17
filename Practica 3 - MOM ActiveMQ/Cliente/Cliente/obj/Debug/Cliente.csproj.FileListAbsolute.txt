@@ -1,0 +1,15 @@
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Cliente.exe.config
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Cliente.exe
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Cliente.pdb
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.csprojResolveAssemblyReference.cache
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.Properties.Resources.resources
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.csproj.GenerateResource.Cache
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.exe
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.pdb
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.ActiveMQ.dll
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.dll
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.pdb
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.xml
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.ActiveMQ.pdb
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\bin\Debug\Apache.NMS.ActiveMQ.xml
+C:\Users\Alberto\Desktop\practicasMTIS\Practica 3\Cliente\Cliente\obj\Debug\Cliente.Cliente.resources

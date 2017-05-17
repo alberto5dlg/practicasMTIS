@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="9090" doc:name="HTTP Listener Configuration"/>
+    <ws:consumer-config name="ProcesoCompra" service="procesoCompraService" port="procesoCompraPort" serviceAddress="http://localhost:8080/ode/processes/procesoCompra" wsdlLocation="http://localhost:8080/ode/deployment/bundles/practica2BPEL/procesoCompraArtifacts.wsdl" doc:name="Web Service Consumer"/>
+    <db:mysql-config name="MySQL_Configuration" host="localhost" port="3311" user="root" password="root" database="resultado" doc:name="MySQL Configuration"/>
+    <db:mysql-config name="MySQL_Configuration1" host="127.0.0.1" port="3311" user="root" password="root" database="resultado" doc:name="MySQL Configuration"/>
+    <http:request-config name="HTTPAPI" protocol="HTTPS" host="dev.datos.ua.es" port="443" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP2" protocol="HTTPS" host="catalogo.datos.ua.es" port="443" doc:name="HTTP Request Configuration"/>
+    <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
+    <flow name="p4muleFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/*" doc:name="HTTP"/>
+        <choice doc:name="Choice">
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/procesocompra']">
+                <flow-ref name="procesoCompra" doc:name="procesoCompra"/>
+            </when>
+            <when expression="#[message.inboundProperties.'http.request.uri'=='/apirest']">
+                <flow-ref name="ApiRest2" doc:name="ApiRest2"/>
+            </when>
+            <otherwise>
+                <logger message="Default Route" level="INFO" doc:name="Logger"/>
+            </otherwise>
+        </choice>
+    </flow>
+    <sub-flow name="procesoCompra">
+        <dw:transform-message metadata:id="716de447-4a4a-4c26-a2ee-0d399468acc3" doc:name="Transform Message">
+            <dw:input-payload doc:sample="sample_data\procesoCompraRequest.xml" mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://procesoCompra.bpel.mtis
+---
+{
+	ns0#procesoCompraRequest: {
+		ns0#refProducto:payload.referencia,
+		ns0#cantidad:payload.cantidad
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="ProcesoCompra" operation="process" doc:name="Proceso Compra"/>
+        <dw:transform-message metadata:id="5576f8d7-6647-49ee-b2ff-a8bd8db66c88" doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+%namespace ns0 http://procesoCompra.bpel.mtis
+---
+payload.ns0#procesoCompraResponse.ns0#pedidoEfectuado as :string]]></dw:set-payload>
+        </dw:transform-message>
+        <set-variable variableName="result" value="#[payload]" doc:name="Variable"/>
+        <db:insert config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[INSERT INTO resultado (resultados) VALUES (#[payload])]]></db:parameterized-query>
+        </db:insert>
+        <set-payload value="#[result]" doc:name="Set Payload"/>
+        <dw:transform-message metadata:id="bc28fd4e-afe2-4981-9e9c-3271e8726c5a" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	resultado: payload as :boolean
+}]]></dw:set-payload>
+        </dw:transform-message>
+    </sub-flow>
+    <sub-flow name="ApiRest2">
+        <http:request config-ref="HTTP2" path="/datasets/Campus o Sedes de la Universidad de Alicante/Campus o Sedes de la Universidad de Alicante.json" method="GET" doc:name="API Request"/>
+        <file:outbound-endpoint path="C:\Users\Alberto\AnypointStudio\workspace\p4mule" outputPattern="resultadoAPI.json" connector-ref="File" responseTimeout="10000" doc:name="File"/>
+        <custom-transformer class="p4mule.lectorJson" doc:name="Java"/>
+        <json:object-to-json-transformer doc:name="Object to JSON"/>
+        <set-payload value="&lt;title&gt;Flujo 2 - Alberto&lt;/title&gt;  
+&lt;meta charset=&quot;utf-8&quot;&gt;        
+&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, user-scalable=no&quot; /&gt;       
+	&lt;style type=&quot;text/css&quot;&gt;
+          html {     
+          	height: 100%   
+          }          
+          body {     
+          	height: 100%;     
+          	margin: 0;     
+          	padding: 0    
+          }          
+          #map_canvas {height: 100% }       
+    &lt;/style&gt;       
+    &lt;script type=&quot;text/javascript&quot; src=&quot;http://maps.googleapis.com/maps/api/js?key=AIzaSyBfUKWPlgGNXaxvkmrFy7U7Rfhn3XL2-90&amp;sensor=true&quot;&gt;&lt;/script&gt;          
+    &lt;script type=&quot;text/javascript&quot; src=&quot;http://code.jquery.com/jquery-latest.min.js&quot;&gt;&lt;/script&gt;        
+&lt;/head&gt; 
+&lt;body&gt;  
+&lt;h1&gt;&lt;/h1&gt;
+&lt;div id=&quot;map_canvas&quot; style=&quot;width:100%; height:100%&quot;&gt; &lt;/div&gt;       
+&lt;script type=&quot;text/javascript&quot;&gt;          
+	jQuery(document).ready(    function($) {
+	    var mapOptions = {
+	        center: new google.maps.LatLng(38.5, -0.5), zoom: 9, mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };                   
+	    var map = new google.maps.Map(document.getElementById(&quot;map_canvas&quot;), mapOptions);
+	    var jsonMapa ='#[payload]';      
+	    var res = JSON.parse(jsonMapa);                    
+	    $.each(res, function(key, data) {                     
+	    	var coordenadas = data.bbox;                     
+	    	var cuatroEsquinas = coordenadas.split(&quot;,&quot;);                   
+	    	var latLng = new google.maps.LatLng(cuatroEsquinas[1], cuatroEsquinas[0]);                    
+	    	var marker = new google.maps.Marker({                       
+	    		position: latLng, title: data.nombre                  
+	    	});           
+	    	marker.setMap(map);                
+	    });           
+	});       
+&lt;/script&gt;    
+&lt;/body&gt;  	                       
+&lt;/html&gt;" doc:name="HTML Response"/>
+    </sub-flow>
+</mule>

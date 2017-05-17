@@ -17,7 +17,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+//import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 /**
      *  ServiciosP1Skeleton java skeleton for the axisService

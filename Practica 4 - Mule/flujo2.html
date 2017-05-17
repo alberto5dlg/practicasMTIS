@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html>   
+<head>     
+<title>Flujo 2 - Alberto</title>  
+<meta charset="utf-8">        
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />       
+	<style type="text/css">
+          html {     
+          	height: 100%   
+          }          
+          body {     
+          	height: 100%;     
+          	margin: 0;     
+          	padding: 0    
+          }          
+          #map_canvas {height: 100% }       
+    </style>       
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBfUKWPlgGNXaxvkmrFy7U7Rfhn3XL2-90&sensor=true"></script>       
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>        
+</head> 
+<body>  
+<h1></h1>
+<div id="map_canvas" style="width:100%; height:100%"> </div>  
+<script type="text/javascript">          
+	jQuery(document).ready(    function($) {
+	    var mapOptions = {
+	        center: new google.maps.LatLng(38.5, -0.5), zoom: 9, mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };                   
+	    var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+	    var jsonMapa ='#[payload]';      
+	    var res = JSON.parse(jsonMapa);                    
+	    $.each(res, function(key, data) {                     
+	    	var coordenadas = data.bbox;                     
+	    	var cuatroEsquinas = coordenadas.split(",");                   
+	    	var latLng = new google.maps.LatLng(cuatroEsquinas[1], cuatroEsquinas[0]);                    
+	    	var marker = new google.maps.Marker({                       
+	    		position: latLng, title: data.nombre                  
+	    	});           
+	    	marker.setMap(map);                
+	    });           
+	});       
+</script>    
+</body>  	                       
+</html>

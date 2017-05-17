@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST) --><serviceGroup>
+    <service name="gestionAlmacen">
+        <messageReceivers>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.gestionalmacen.GestionAlmacenMessageReceiverInOut"/>
+        </messageReceivers>
+        <parameter name="ServiceClass">org.example.www.gestionalmacen.GestionAlmacenSkeleton</parameter>
+        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="modifyUserWSDLPortAddress">true</parameter>
+        <operation name="ComprobarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/gestionAlmacen/">
+            <actionMapping>http://www.example.org/gestionAlmacen/ComprobarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/gestionAlmacen/gestionAlmacen/ComprobarStockResponse</outputActionMapping>
+        </operation>
+        <operation name="ActualizarStock" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/gestionAlmacen/">
+            <actionMapping>http://www.example.org/gestionAlmacen/ActualizarStock</actionMapping>
+            <outputActionMapping>http://www.example.org/gestionAlmacen/gestionAlmacen/ActualizarStockResponse</outputActionMapping>
+        </operation>
+    </service>
+</serviceGroup>

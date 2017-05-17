@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ns0:procesoCompraRequest xmlns:ns0="http://procesoCompra.bpel.mtis">
+  <ns0:refProducto>????</ns0:refProducto>
+  <ns0:cantidad>1</ns0:cantidad>
+</ns0:procesoCompraRequest>

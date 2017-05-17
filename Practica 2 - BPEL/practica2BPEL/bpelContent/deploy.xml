@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:gestionAlmacen="http://www.example.org/gestionAlmacen/" xmlns:procesoCompra.bpel.mtis="http://procesoCompra.bpel.mtis" xmlns:proveedor1="http://www.example.org/proveedor1/" xmlns:proveedor2="http://www.example.org/proveedor2/" xmlns:proveedor3="http://www.example.org/proveedor3/">
+  <process name="procesoCompra.bpel.mtis:procesoCompra">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="procesoCompra.bpel.mtis:procesoCompraService" port="procesoCompraPort"/>
+    </provide>
+    <invoke partnerLink="compAlmPL">
+      <service name="gestionAlmacen:gestionAlmacen" port="gestionAlmacenSOAP"/>
+    </invoke>
+    <invoke partnerLink="prov1PL">
+      <service name="proveedor1:proveedor1" port="proveedor1SOAP"/>
+    </invoke>
+    <invoke partnerLink="prov2PL">
+      <service name="proveedor2:proveedor2" port="proveedor2SOAP"/>
+    </invoke>
+    <invoke partnerLink="prov3PL">
+      <service name="proveedor3:proveedor3" port="proveedor3SOAP"/>
+    </invoke>
+  </process>
+</deploy>

@@ -1,0 +1,9 @@
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\bin\Debug\clienteP2.exe.config
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\bin\Debug\clienteP2.exe
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\bin\Debug\clienteP2.pdb
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.csprojResolveAssemblyReference.cache
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.Form1.resources
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.Properties.Resources.resources
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.csproj.GenerateResource.Cache
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.exe
+C:\Users\Alberto\Desktop\practicasMTIS\p2\cliente\clienteP2\clienteP2\obj\Debug\clienteP2.pdb
